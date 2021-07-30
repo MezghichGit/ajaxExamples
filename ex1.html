@@ -1,0 +1,50 @@
+<!Doctype html>
+<html>
+
+<head>
+
+    <script>
+        function afficher() {
+
+
+            var xhr = null;
+            //Step 1 : On crée l'objet Ajax
+            xhr = new XMLHttpRequest();
+
+            //Step 2 : On teste l'état de l'objet Ajax
+            xhr.onreadystatechange = function () {
+
+                //alert("Etat de Ajax: " +xhr.readyState);*
+                //alert(xhr.readyState);
+                if ((xhr.readyState == 4) && (xhr.status == 200)) {
+                    document.getElementById("def").textContent = xhr.responseText;
+                }
+
+                if ((xhr.readyState == 4) && xhr.status == 404) {
+                    alert("Fichier introuvale");
+                }
+
+            }
+
+
+            //Step 3 : On défini la cible
+            xhr.open('GET', 'definition.txt', true);  // connexion
+            xhr.send(null);
+
+        }
+
+    </script>
+
+
+</head>
+
+<body>
+
+    <h1 align="center">Cours Ajax</h1>
+
+    <button onclick="afficher()">Cliquer ici</button>
+
+    <p id="def" style="border:solid"></p>
+</body>
+
+</html>

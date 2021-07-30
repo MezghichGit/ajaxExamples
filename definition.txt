@@ -1,0 +1,1 @@
+Ajax est une technique Javascript pour la mise à jour partielle d'une page web

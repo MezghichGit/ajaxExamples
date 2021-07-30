@@ -1,0 +1,94 @@
+<!Doctype html>
+<html>
+
+<head>
+<meta charset="utf-8"/>
+    <script>
+        function charger() {
+
+
+            xhr = null;
+            //Step 1 : On crée l'objet Ajax
+            xhr = new XMLHttpRequest();
+
+            //Step 2 : On teste l'état de l'objet Ajax
+            xhr.onreadystatechange = function () {
+
+                
+                if ((xhr.readyState == 4) && (xhr.status == 200)) {
+                    // traitement doit se faire ici
+                    document.getElementById("etudiants").innerHTML = xhr.responseText;
+                }
+
+                if ((xhr.readyState == 4) && xhr.status == 404) {
+                    alert("Fichier introuvale");
+                }
+
+            }
+
+
+            //Step 3 : On défini la cible
+            xhr.open('GET', 'etudiants.php', true);  // connexion
+            xhr.send(null);
+
+        }
+
+
+       function search(){
+
+        // récupération du mot saisi
+        var  word = document.getElementById("inputsearch").value;
+
+        xhr = null;
+            //Step 1 : On crée l'objet Ajax
+            xhr = new XMLHttpRequest();
+
+            //Step 2 : On teste l'état de l'objet Ajax
+            xhr.onreadystatechange = function () {
+
+                
+                if ((xhr.readyState == 4) && (xhr.status == 200)) {
+                    // traitement doit se faire ici
+                    document.getElementById("info").innerHTML = xhr.responseText;
+                }
+
+                if ((xhr.readyState == 4) && xhr.status == 404) {
+                    alert("Fichier introuvale");
+                }
+
+            }
+
+
+            //Step 3 : On défini la cible
+            xhr.open('GET', 'recherche.php?key='+word, true);  // connexion
+            xhr.send(null);
+
+       }
+
+    </script>
+
+
+</head>
+
+<body>
+
+    <h1 align="center">Liste des étudiants</h1>
+
+    <button onclick="charger()">Charger la liste des étudiants de la base</button>
+
+    <div id="etudiants">Aucun étudiant</div>
+
+    <hr/>
+    <br/>
+
+
+
+        Taper un nom : <input id="inputsearch" type="text" name="user"/>
+        <button onclick="search()">Chercher</button>
+ 
+
+
+    <div id="info">Aucune information</div>
+</body>
+
+</html>

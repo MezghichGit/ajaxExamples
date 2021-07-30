@@ -1,0 +1,50 @@
+<!Doctype html>
+<html>
+
+<head>
+
+    <script>
+        function charger() {
+
+
+            xhr = null;
+            //Step 1 : On crée l'objet Ajax
+            xhr = new XMLHttpRequest();
+
+            //Step 2 : On teste l'état de l'objet Ajax
+            xhr.onreadystatechange = function () {
+
+                
+                if ((xhr.readyState == 4) && (xhr.status == 200)) {
+                    // traitement doit se faire ici
+                    document.getElementById("produits").innerHTML = xhr.responseText;
+                }
+
+                if ((xhr.readyState == 4) && xhr.status == 404) {
+                    alert("Fichier introuvale");
+                }
+
+            }
+
+
+            //Step 3 : On défini la cible
+            xhr.open('GET', 'load.php', true);  // connexion
+            xhr.send(null);
+
+        }
+
+    </script>
+
+
+</head>
+
+<body>
+
+    <h1 align="center">Liste de nos produits</h1>
+
+    <button onclick="charger()">Charger les produits de la base</button>
+
+    <div id="produits">Aucun produit</div>
+</body>
+
+</html>

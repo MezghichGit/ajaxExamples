@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $.ajax(
+	 {
+	  url: "message2.txt", 
+	  success: function(result){
+                   $("#div2").html(result);
+                 },
+	  error :function(){
+                   alert("Un problème rencontré");
+                 }
+	});
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>AJAX et jQuery</h2></div>
+
+<div id="div2"></div>
+<button>Charger le contenu du fichier message.txt</button>
+
+</body>
+</html>

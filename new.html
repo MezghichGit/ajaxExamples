@@ -1,0 +1,65 @@
+<!Doctype html>
+<html>
+
+<head>
+
+    <script>
+	     function insertion() {
+	      // step 1 : récupération des data du form
+		  
+		    var  nom = document.addForm.nom.value;
+			var  email = document.addForm.email.value;
+			var  ville = document.addForm.ville.value;
+			
+		  //step 2 : déclaration et creation de l'objet ajax
+		    xhr = null;
+            xhr = new XMLHttpRequest();
+			
+			xhr.onreadystatechange = function () {
+
+          //step 3 : récupération du résultat suite à l'ajout (un petit message d'insertion avec succès)     
+                if ((xhr.readyState == 4) && (xhr.status == 200)) {
+                    // traitement doit se faire ici
+                     document.getElementById("def").innerHTML = xhr.responseText;
+					 
+					  document.addForm.nom.value ="";
+					  document.addForm.email.value="";
+			          document.addForm.ville.value="";
+			
+					alert("Insertion avec succès");
+					//alert(xhr.responseText);
+                }
+
+                if ((xhr.readyState == 4) && xhr.status == 404) {
+                    alert("Fichier introuvale");
+                }
+
+            }
+			
+			
+			//Step 4 : On défini la cible
+            xhr.open('GET', 'addEtudiant.php?nom='+nom+'&email='+email+'&ville='+ville, true);  // connexion
+            xhr.send(null);
+	    }
+        
+
+    </script>
+
+
+</head>
+
+<body>
+
+    <h1 align="center">Ajouter nouvel etudiant</h1>
+	<form name="addForm">
+	Nom : <input type="text" name="nom"/>
+	Email : <input type="text" name="email"/>
+	Ville : <input type="text" name="ville"/>
+	</form>
+
+    <button onclick="insertion()">Ajouter</button>
+
+    <p id="def" style="border:solid"></p>
+</body>
+
+</html>

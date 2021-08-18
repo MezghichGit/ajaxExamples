@@ -10,6 +10,9 @@
             var xhr = null;
             //Step 1 : On crée l'objet Ajax
             xhr = new XMLHttpRequest();
+			//Step 3 : On défini la cible
+            xhr.open('GET', 'definition.php', true);  // connexion
+            xhr.send(null);
 
             //Step 2 : On teste l'état de l'objet Ajax
             xhr.onreadystatechange = function () {
@@ -17,7 +20,7 @@
                 //alert("Etat de Ajax: " +xhr.readyState);*
                 //alert(xhr.readyState);
                 if ((xhr.readyState == 4) && (xhr.status == 200)) {
-                    document.getElementById("def").textContent = xhr.responseText;
+                    document.getElementById("def").innerHTML = xhr.responseText;
                 }
 
                 if ((xhr.readyState == 4) && xhr.status == 404) {
@@ -27,9 +30,7 @@
             }
 
 
-            //Step 3 : On défini la cible
-            xhr.open('GET', 'definition.txt', true);  // connexion
-            xhr.send(null);
+            
 
         }
 
